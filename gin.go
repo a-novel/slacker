@@ -6,6 +6,21 @@ import (
 	"time"
 )
 
+func (api *API) GinError(c *gin.Context, m string) {
+	err := api.Error(
+		fmt.Sprintf(
+			"*%s %s*\n\n```%s```\n\n",
+			c.Request.Method,
+			c.Request.URL,
+			m,
+		),
+	)
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+}
+
 func (api *API) GinFormatter(param gin.LogFormatterParams) string {
 	err := api.Error(
 		fmt.Sprintf(
